@@ -46,7 +46,19 @@ export const updateBlogSchema = z.object({
     }),
 
     params: z.object({
-        id: z.string({required_error:'id is required', 
+        blogid: z.string({required_error:'id is required', 
     invalid_type_error:' blog id is must be string'})
     })
 });
+
+
+export const deleteBlogSchema = z.object({
+    params: z.object({
+        blogid: z.string({required_error:'id is required', 
+    invalid_type_error:' blog id is must be string'})
+    })
+});
+
+
+export type updateBlogSchemaType = z.infer < typeof updateBlogSchema> ['params'];
+export type deleteBlogSchemaType = z.infer < typeof deleteBlogSchema> ['params'];

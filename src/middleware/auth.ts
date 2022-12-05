@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import * as jwt from 'jsonwebtoken';
 
 export interface IUser {
-    id: string
+    id: string;
 }
 
 export const protect = (req: Request, res: Response, next: NextFunction) => {
@@ -12,7 +12,7 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
     let token = req.headers.authorization;
 
     if(!token) {
-        return res.status(400).json({
+        return res.status(401).json({
             message: 'You are not allowed to access this page'
         });
     }
