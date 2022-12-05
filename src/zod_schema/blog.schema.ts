@@ -24,4 +24,29 @@ export const loginSchema = z.object({
             required_error:'Password is required', invalid_type_error: 'Password must be a string'
         }),
     })
-})
+});
+
+export const addBlogSchema = z.object({
+    body: z.object({
+        title:z.
+        string({required_error: 'Title is required',
+    invalid_type_error: 'Title must be a string'})
+    .max(15, 'Title must be less than 15 char')
+    }),
+    message: z.string({required_error:'Message is required'}),
+});
+
+export const updateBlogSchema = z.object({
+    body: z.object({
+        title:z.
+        string({required_error: 'Title is required',
+    invalid_type_error: 'Title must be a string'})
+    .max(15, 'Title must be less than 15 char'),
+    message: z.string({required_error:'Message is required'}),
+    }),
+
+    params: z.object({
+        id: z.string({required_error:'id is required', 
+    invalid_type_error:' blog id is must be string'})
+    })
+});

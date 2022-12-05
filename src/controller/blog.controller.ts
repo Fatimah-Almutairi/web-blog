@@ -1,8 +1,44 @@
-import { User } from "@prisma/client";
+import { Blog, User } from "@prisma/client";
 import { Request, Response } from "express";
 import * as argon2 from 'argon2';
 import * as jwt from 'jsonwebtoken';
 import { prisma } from '../config/db';
+import { IUser } from "../middleware/auth";
+
+export const getBlog = async (req: Request, res: Response) => {
+    const user = res.locals.user as IUser;
+
+    const blogs = await prisma.blog.findMany({
+        where: {user_id: user.id},
+    });
+    return res.status(200).json(blogs)
+};
+
+export const addBlog = async (req: Request, res: Response) => {
+    const {title, message} = req.body as Blog
+    const user = res.locals.user as IUser;
+    await prisma.blog.create({
+        data: {
+            title ,
+            user_id: user.id,
+            message,
+        },
+    });
+
+    return res.status(201).json({
+        message: 'New blog created for user: '+ user.id,
+    });
+
+};
+
+export const updateBlog = (req: Request, res: Response) => {
+
+};
+
+export const deleteBlog = (req: Request, res: Response) => {
+
+};
+
 
 
 export const loginHandler = async (req: Request, res: Response) => {
