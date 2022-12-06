@@ -79,7 +79,8 @@ export const RegisterPage = () =>{
       setPassword ={setPassword} 
       setPassword2= {setPassword2}
       password2 ={password2}
-      password= {password} submitRegister= {submitRegister}/>
+      password= {password} 
+      submitRegister= {submitRegister}/>
       </VStack>
     </Flex>
 

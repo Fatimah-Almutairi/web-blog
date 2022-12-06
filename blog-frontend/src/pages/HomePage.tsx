@@ -57,6 +57,7 @@ const toast = useToast();
 
   return (
   <Flex justifyContent='center' alignItems='center' height='100vh'>
+    <VStack border='1rem' width='100%'>
       <Heading>Blogs</Heading>
       <VStack border='1rem' padding='3rem'>
         {blog.map( (blog: any) => (
@@ -73,7 +74,7 @@ const toast = useToast();
         </VStack>
 
     </VStack>
-
+    </VStack>
   </Flex>    
   )
 }
