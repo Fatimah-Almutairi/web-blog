@@ -20,11 +20,11 @@ export const LoginPage = () =>{
     try{
       const request = await fetch('/api/v1/blog/login',
       {
-       method: 'POST',
-       headers: {
-        'Content-Type': 'application/json',
-       } ,
-       body: JSON.stringify({username, password})
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       });
       const data = await request.json();
       if(request.status!== 200){
