@@ -1,68 +1,36 @@
-import {
-  Flex,
-  VStack,
-  Heading,
-  useToast,
-} from "@chakra-ui/react"
-import { useState } from "react";
-import LoginForm from "../components/LoginForm";
+import { Card, CardBody, Flex, VStack , Text, Heading} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react'
 
-export const HomePage = () =>{
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const toast = useToast();
-
-
-  const submitLogin = async () => {
-    try{
-      const request = await fetch('/api/v1/blog/login',
-      {
-       method: 'POST',
-       headers: {
-        'Content-Type': 'application/json',
-       } ,
-       body: JSON.stringify({username, password})
+function HomePage() {
+const [blog, setBlog] = useState();
+  useEffect( () => {
+    const fetchBlog = async () => {
+      const request = await fetch('/api/v1/blog',{
+         headers: {
+          Authorization: 'Bearer' + localStorage.getItem('token'),
+         },
       });
       const data = await request.json();
-      if(request.status!== 200){
-        toast({
-          title: data.message,
-          status: 'error',
-          duration: 3000,
-          position: 'top',
-        });
-        return;
-      }
-      toast({
-        title: data.message,
-        status: 'success',
-        duration: 3000,
-        position: 'top',
-      });
-
-      localStorage.setItem('token', data.token)
-
-    }catch(error){
-      toast({
-        title: 'Server Error',
-        status: 'error',
-        duration: 3000,
-        position: 'top',
-      });
-    }
-  };
-   
+      setBlog(data);
+    };
+    fetchBlog();
+  },[])
   return (
+  <Flex justifyContent='center' alignItems='center' height='100vh'>
+      <Heading>Blogs</Heading>
+      <VStack border='1rem' padding='3rem'>
+        {blog.map( (blog: any) => (
+      <Card>
+      <CardBody>
+        <Text>{blog.title}</Text>
+      </CardBody>
+    </Card>
+        ))}
 
-    <Flex justifyContent='center' alignItems='center' height='100vh'>
-      <VStack spacing='2rem'>
-      <Heading>Login</Heading>
-      <LoginForm username={username} 
-      setUsername = {setUsername}
-      setPassword ={setPassword}
-      password= {password} submitLogin= {submitLogin}/>
-      </VStack>
-    </Flex>
+    </VStack>
 
-);
+  </Flex>    
+  )
 }
+
+export default HomePage;
