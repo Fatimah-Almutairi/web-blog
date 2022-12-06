@@ -7,11 +7,13 @@ const express_1 = __importDefault(require("express"));
 const db_1 = require("./config/db");
 const blog_route_1 = __importDefault(require("./routes/blog.route"));
 require("dotenv/config");
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 (0, db_1.connectDB)();
+app.use((0, cors_1.default)());
 app.use('/api/v1/blog', blog_route_1.default);
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5015;
 app.listen(PORT, () => {
-    console.log('server is running in port 5000');
+    console.log('server is running in port ' + PORT);
 });

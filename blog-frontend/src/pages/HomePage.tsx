@@ -5,15 +5,12 @@ import {
   useToast,
 } from "@chakra-ui/react"
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
-export const LoginPage = () =>{
+export const HomePage = () =>{
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const toast = useToast();
-  const navigate = useNavigate();
-
 
 
   const submitLogin = async () => {
@@ -43,7 +40,6 @@ export const LoginPage = () =>{
         position: 'top',
       });
 
-      navigate('/');
       localStorage.setItem('token', data.token)
 
     }catch(error){
