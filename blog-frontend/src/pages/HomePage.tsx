@@ -1,4 +1,4 @@
-import { Card, CardBody, Flex, VStack , Text, Heading, useToast} from '@chakra-ui/react';
+import { Card, CardBody, Flex, VStack , Text, Heading, useToast, Input, Button} from '@chakra-ui/react';
 import { useEffect, useState } from 'react'
 
 function HomePage() {
@@ -66,6 +66,11 @@ const toast = useToast();
       </CardBody>
     </Card>
         ))}
+
+        <VStack >
+          <Input value={title} onChange= {(e) => setTitle(e.target.value)} placeholder='Add new blog' />
+          <Button onClick={addNew}>Add Blog</Button>
+        </VStack>
 
     </VStack>
 
