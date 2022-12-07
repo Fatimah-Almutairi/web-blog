@@ -7,8 +7,7 @@ export const registerSchema = z.object({
         .min(4,'Username must be more than 4 char').max(15, 'Username must be less than 15 char'),
         password: z
         .string({required_error:'Password is required'})
-        .min(6,'Password must be more than 6 char').max(15, 'Password must be less than 15 char')
-        .regex(new RegExp('^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$'), 'Your Password is not strong '),
+        .min(6,'Password must be more than 6 char').max(15, 'Password must be less than 15 char'),
         email: z         
         .string({required_error:'Email is required', invalid_type_error: 'Email must be a string'})
         .email('Please enter a valid email'),
